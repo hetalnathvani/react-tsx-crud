@@ -1,3 +1,8 @@
+import { Button, IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { grey } from "@mui/material/colors";
+import AddIcon from "@mui/icons-material/Add";
+
 interface Data {
   name: string;
   city: string;
@@ -28,8 +33,17 @@ const records: Data[] = [
 ];
 
 export const List = () => {
+  const openAddEmployeeForm = () => {};
+
   return (
     <div>
+      <Button
+        onClick={openAddEmployeeForm}
+        style={{ backgroundColor: grey["50"], color: grey["800"] }}
+      >
+        <AddIcon />
+        Add Employee
+      </Button>
       <table>
         <thead>
           <tr>
@@ -48,7 +62,9 @@ export const List = () => {
               <td>{r.city}</td>
               <td>{r.education}</td>
               <td>
-                <button>View</button>
+                <IconButton>
+                  <EditIcon style={{ color: grey["50"] }} />
+                </IconButton>
               </td>
             </tr>
           ))}
