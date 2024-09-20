@@ -33,17 +33,8 @@ const records: Data[] = [
 ];
 
 export const List = () => {
-  const openAddEmployeeForm = () => {};
-
   return (
     <div>
-      <Button
-        onClick={openAddEmployeeForm}
-        style={{ backgroundColor: grey["50"], color: grey["800"] }}
-      >
-        <AddIcon />
-        Add Employee
-      </Button>
       <table>
         <thead>
           <tr>
