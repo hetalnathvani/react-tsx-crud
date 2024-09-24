@@ -26,10 +26,7 @@ export const FormDialog = () => {
 
   return (
     <div>
-      <Button
-        onClick={openAddEmployeeForm}
-        style={{ backgroundColor: grey["50"], color: grey["800"] }}
-      >
+      <Button onClick={openAddEmployeeForm}>
         <AddIcon />
         Add Employee
       </Button>
