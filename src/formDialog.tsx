@@ -1,4 +1,12 @@
-import { Button, Dialog } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import { grey } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
@@ -14,6 +22,8 @@ export const FormDialog = () => {
     setOpen(true);
   };
 
+  const handleSubmit = () => {};
+
   return (
     <div>
       <Button
@@ -24,7 +34,39 @@ export const FormDialog = () => {
         Add Employee
       </Button>
 
-      <Dialog open={open} onClose={handleClose}></Dialog>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          component: "form",
+          onSubmit: () => {
+            handleSubmit();
+          },
+        }}
+      >
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="email"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Subscribe</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

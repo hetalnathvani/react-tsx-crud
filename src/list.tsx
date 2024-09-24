@@ -1,7 +1,8 @@
-import { Button, IconButton } from "@mui/material";
+import { Box, Button, IconButton, Paper } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { grey } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
+import { FormDialog } from "./formDialog";
 
 interface Data {
   name: string;
@@ -34,8 +35,10 @@ const records: Data[] = [
 
 export const List = () => {
   return (
-    <div>
-      <table>
+    <Box sx={{ width: "100%" }}>
+      <FormDialog />
+      <Paper></Paper>
+      {/* <table>
         <thead>
           <tr>
             <td>No.</td>
@@ -60,7 +63,7 @@ export const List = () => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </table> */}
+    </Box>
   );
 };
