@@ -7,9 +7,14 @@ import {
   TextField,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import { FC, useState } from "react";
 
-export const AddEmployee = () => {
+interface ListProps {
+  testProp: String;
+}
+
+export const AddEmployee: FC<ListProps> = ({ testProp }): JSX.Element => {
+  console.log(testProp);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {

@@ -24,6 +24,8 @@ interface Data {
   education: string;
 }
 
+const test: String = "Hi I am coming from List page to Add pop up ";
+
 const records: Data[] = [
   {
     name: "Hetal",
@@ -78,7 +80,7 @@ export const List = () => {
     <Box sx={{ width: "90%", p: 8 }}>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Employees listing</Typography>
-        <AddEmployee />
+        <AddEmployee testProp={test} />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
@@ -90,7 +92,7 @@ export const List = () => {
             <EnhancedTableHead />
             <TableBody>
               {records.map((r, index) => (
-                <TableRow>
+                <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>
                     <Avatar sx={{ bgcolor: pink[500] }}>
