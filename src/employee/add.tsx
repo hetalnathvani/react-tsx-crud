@@ -3,15 +3,13 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 
-export const FormDialog = () => {
+export const AddEmployee = () => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -41,27 +39,56 @@ export const FormDialog = () => {
           },
         }}
       >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Add Employee Form</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
+            name="name"
+            label="Name"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="email"
             name="email"
             label="Email Address"
             type="email"
             fullWidth
             variant="standard"
           />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="project"
+            name="project"
+            label="Projects Assigned"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="technologies"
+            name="technologies"
+            label="Technologies"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
+          <Button type="submit">Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
