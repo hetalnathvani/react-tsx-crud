@@ -12,17 +12,10 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 import { blue, pink } from "@mui/material/colors";
-import { AddEmployee } from "./add";
-
-interface Data {
-  name: string;
-  email: string;
-  project: string;
-  city: string;
-  education: string;
-}
+import { AddEmployee, Data } from "./add";
+import { DeleteEmployee } from "./delete";
+import { EditEmployee } from "./edit";
 
 const test: String = "Hi I am coming from List page to Add pop up ";
 
@@ -80,7 +73,7 @@ export const List = () => {
     <Box sx={{ width: "90%", p: 8 }}>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Employees listing</Typography>
-        <AddEmployee testProp={test} />
+        <AddEmployee testProp={test} records={records} />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
@@ -103,12 +96,9 @@ export const List = () => {
                   <TableCell>{r.email}</TableCell>
                   <TableCell>{r.project}</TableCell>
                   <TableCell>{r.city}</TableCell>
-                  <TableCell>
-                    <Tooltip title="Edit">
-                      <IconButton>
-                        <EditIcon style={{ color: blue["600"] }} />
-                      </IconButton>
-                    </Tooltip>
+                  <TableCell sx={{ display: "flex" }}>
+                    <EditEmployee testProp={test} records={records} />
+                    <DeleteEmployee />
                   </TableCell>
                 </TableRow>
               ))}

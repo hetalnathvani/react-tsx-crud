@@ -9,12 +9,23 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import { FC, useState } from "react";
 
-interface ListProps {
-  testProp: String;
+export type Data = {
+  name: string;
+  email: string;
+  project: string;
+  city: string;
+  education: string;
 }
 
-export const AddEmployee: FC<ListProps> = ({ testProp }): JSX.Element => {
+type ListProps = {
+  testProp: String;
+  records: Data[];
+}
+
+export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element => {
   console.log(testProp);
+  console.log(records);
+  
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
