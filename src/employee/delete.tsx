@@ -1,6 +1,5 @@
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
   Button,
