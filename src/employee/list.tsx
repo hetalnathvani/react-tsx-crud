@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -9,10 +8,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Tooltip,
   Typography,
 } from "@mui/material";
-import { blue, pink } from "@mui/material/colors";
+import { pink } from "@mui/material/colors";
 import { AddEmployee, Data } from "./add";
 import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
@@ -61,7 +59,8 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
         <TableCell>Name</TableCell>
         <TableCell>Email</TableCell>
         <TableCell>Project</TableCell>
-        <TableCell>Technologies</TableCell>
+        <TableCell>City</TableCell>
+        <TableCell>Education</TableCell>
         <TableCell>Action</TableCell>
       </TableRow>
     </TableHead>
@@ -96,6 +95,7 @@ export const List = () => {
                   <TableCell>{r.email}</TableCell>
                   <TableCell>{r.project}</TableCell>
                   <TableCell>{r.city}</TableCell>
+                  <TableCell>{r.education}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee testProp={test} records={records} />
                     <DeleteEmployee />
