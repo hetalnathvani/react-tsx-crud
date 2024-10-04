@@ -14,6 +14,8 @@ import { pink } from "@mui/material/colors";
 import { AddEmployee, Data } from "./add";
 import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
+import { useEffect, useState } from "react";
+import { getAPI } from "../helper/Api";
 
 const test: String = "Hi I am coming from List page to Add pop up ";
 
@@ -68,6 +70,18 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
 }
 
 export const List = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    getAPI("employees", "").then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <Box sx={{ width: "90%", p: 8 }}>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
