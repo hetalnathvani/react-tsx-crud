@@ -11,44 +11,13 @@ import {
   Typography,
 } from "@mui/material";
 import { pink } from "@mui/material/colors";
-import { AddEmployee, Data } from "./add";
+import { AddEmployee } from "./add";
 import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../helper/Api";
 
 const test: String = "Hi I am coming from List page to Add pop up ";
-
-const records: Data[] = [
-  {
-    name: "Hetal",
-    email: "hetal@openxcellinc.com",
-    project: "TalentATS",
-    city: "Ahmedabad",
-    education: "B.E.",
-  },
-  {
-    name: "Daksh",
-    email: "daksh@openxcellinc.com",
-    project: "Husk",
-    city: "Ahmedabad",
-    education: "B.E.",
-  },
-  {
-    name: "Akshay",
-    email: "akshay@mailinator.com",
-    project: "SAP",
-    city: "Ahmedabad",
-    education: "CA",
-  },
-  {
-    name: "Keval",
-    email: "keval@mailinator.com",
-    project: "Sunrise Detox",
-    city: "Ahmedabad",
-    education: "M.D.",
-  },
-];
 
 interface EnhanceTableHeadProps {}
 
@@ -70,7 +39,7 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
 }
 
 export const List = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     getData();
@@ -78,7 +47,7 @@ export const List = () => {
 
   const getData = () => {
     getAPI("employees", "").then((res) => {
-      console.log(res);
+      setData(res.data.data);
     });
   };
 
@@ -86,7 +55,7 @@ export const List = () => {
     <Box sx={{ width: "90%", p: 8 }}>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Employees listing</Typography>
-        <AddEmployee testProp={test} records={records} />
+        <AddEmployee testProp={test} records={data} />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
@@ -97,7 +66,7 @@ export const List = () => {
           >
             <EnhancedTableHead />
             <TableBody>
-              {records.map((r, index) => (
+              {data.map((r, index) => (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>
@@ -107,11 +76,11 @@ export const List = () => {
                   </TableCell>
                   <TableCell>{r.name}</TableCell>
                   <TableCell>{r.email}</TableCell>
-                  <TableCell>{r.project}</TableCell>
+                  <TableCell>{r.projects}</TableCell>
                   <TableCell>{r.city}</TableCell>
                   <TableCell>{r.education}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
-                    <EditEmployee testProp={test} records={records} />
+                    <EditEmployee testProp={test} records={data} />
                     <DeleteEmployee />
                   </TableCell>
                 </TableRow>
