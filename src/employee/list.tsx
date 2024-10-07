@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { pink } from "@mui/material/colors";
-import { AddEmployee } from "./add";
+import AddEmployee from "./add";
 import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
@@ -55,7 +55,7 @@ export const List = () => {
     <Box sx={{ width: "90%", p: 8 }}>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Employees listing</Typography>
-        <AddEmployee testProp={test} records={data} />
+        <AddEmployee />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>

@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { FC, useState } from "react";
+import { FormikProps, withFormik } from "formik";
+import * as Yup from "yup";
 
 export type Data = {
   name: string;
@@ -15,17 +17,42 @@ export type Data = {
   project: string;
   city: string;
   education: string;
-}
+};
 
 type ListProps = {
   testProp: String;
   records: Data[];
+};
+
+interface OtherProps {
+  title?: string;
 }
 
-export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element => {
-  console.log(testProp);
-  console.log(records);
-  
+// interface defined for formValues
+interface FormValues {
+  name: String;
+  email: String;
+  projects: String;
+  city: String;
+  education: String;
+}
+
+interface MyFormProps {
+  initialEmail?: string;
+  initialPassword?: string;
+}
+
+const InnerForm = (props: FormikProps<FormValues>): JSX.Element => {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    isSubmitting,
+  } = props;
+
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -35,8 +62,6 @@ export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element =
   const openAddEmployeeForm = () => {
     setOpen(true);
   };
-
-  const handleSubmit = () => {};
 
   return (
     <div>
@@ -67,6 +92,7 @@ export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element =
             type="text"
             fullWidth
             variant="standard"
+            onChange={handleChange}
           />
           <TextField
             autoFocus
@@ -78,6 +104,7 @@ export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element =
             type="email"
             fullWidth
             variant="standard"
+            onChange={handleChange}
           />
           <TextField
             autoFocus
@@ -89,17 +116,31 @@ export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element =
             type="text"
             fullWidth
             variant="standard"
+            onChange={handleChange}
           />
           <TextField
             autoFocus
             required
             margin="dense"
-            id="technologies"
-            name="technologies"
-            label="Technologies"
+            id="city"
+            name="city"
+            label="City"
             type="text"
             fullWidth
             variant="standard"
+            onChange={handleChange}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="education"
+            name="education"
+            label="Education"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
@@ -110,3 +151,23 @@ export const AddEmployee: FC<ListProps> = ({ testProp, records }): JSX.Element =
     </div>
   );
 };
+
+const AddEmployee = withFormik<MyFormProps, FormValues>({
+  validationSchema: Yup.object().shape({
+    name: Yup.string().required("Name is required!"),
+    email: Yup.string()
+      .email("Email is not valid")
+      .required("Email is required!"),
+    projects: Yup.string().required("Projects cannot be empty!"),
+    city: Yup.string().required("City is required!"),
+  }),
+
+  handleSubmit(
+    { name, email, projects, city, education }: FormValues,
+    { props, setSubmitting, setErrors }
+  ) {
+    console.log(name, email);
+  },
+})(InnerForm);
+
+export default AddEmployee;
