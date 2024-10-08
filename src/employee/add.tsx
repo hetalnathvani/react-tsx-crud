@@ -1,58 +1,16 @@
 import {
   Button,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
   TextField,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { FC, useState } from "react";
-import { FormikProps, withFormik } from "formik";
+import { useState } from "react";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
-export type Data = {
-  name: string;
-  email: string;
-  project: string;
-  city: string;
-  education: string;
-};
-
-type ListProps = {
-  testProp: String;
-  records: Data[];
-};
-
-interface OtherProps {
-  title?: string;
-}
-
-// interface defined for formValues
-interface FormValues {
-  name: String;
-  email: String;
-  projects: String;
-  city: String;
-  education: String;
-}
-
-interface MyFormProps {
-  initialEmail?: string;
-  initialPassword?: string;
-}
-
-const InnerForm = (props: FormikProps<FormValues>): JSX.Element => {
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-  } = props;
-
+const AddEmployee = (): JSX.Element => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -63,6 +21,29 @@ const InnerForm = (props: FormikProps<FormValues>): JSX.Element => {
     setOpen(true);
   };
 
+  const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "Name must be minimum 2")
+      .max(100, "Name must not be more than 100 characters")
+      .required("Name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    projects: Yup.string().required(),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      projects: "",
+      city: "",
+      education: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
     <div>
       <Button onClick={openAddEmployeeForm}>
@@ -70,104 +51,91 @@ const InnerForm = (props: FormikProps<FormValues>): JSX.Element => {
         Add Employee
       </Button>
 
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: "form",
-          onSubmit: () => {
-            handleSubmit();
-          },
-        }}
-      >
+      <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Employee Form</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="name"
-            label="Name"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="email"
-            name="email"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="project"
-            name="project"
-            label="Projects Assigned"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="city"
-            name="city"
-            label="City"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="education"
-            name="education"
-            label="Education"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              fullWidth
+              id="name"
+              name="name"
+              label="Name"
+              type="text"
+              margin="dense"
+              variant="standard"
+              value={formik.values.name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              type="text"
+              margin="dense"
+              variant="standard"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <TextField
+              required
+              margin="dense"
+              id="projects"
+              name="projects"
+              label="Projects Assigned"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.projects}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.projects && Boolean(formik.errors.projects)}
+              helperText={formik.touched.projects && formik.errors.projects}
+            />
+            <TextField
+              required
+              margin="dense"
+              id="city"
+              name="city"
+              label="City"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.city}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.city && Boolean(formik.errors.city)}
+              helperText={formik.touched.city && formik.errors.city}
+            />
+            <TextField
+              required
+              margin="dense"
+              id="education"
+              name="education"
+              label="Education"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={formik.values.education}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.education && Boolean(formik.errors.education)
+              }
+              helperText={formik.touched.education && formik.errors.education}
+            />
+            <button type="submit">Submit</button>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Submit</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
 };
-
-const AddEmployee = withFormik<MyFormProps, FormValues>({
-  validationSchema: Yup.object().shape({
-    name: Yup.string().required("Name is required!"),
-    email: Yup.string()
-      .email("Email is not valid")
-      .required("Email is required!"),
-    projects: Yup.string().required("Projects cannot be empty!"),
-    city: Yup.string().required("City is required!"),
-  }),
-
-  handleSubmit(
-    { name, email, projects, city, education }: FormValues,
-    { props, setSubmitting, setErrors }
-  ) {
-    console.log(name, email);
-  },
-})(InnerForm);
 
 export default AddEmployee;

@@ -66,7 +66,7 @@ export const List = () => {
           >
             <EnhancedTableHead />
             <TableBody>
-              {data.map((r, index) => (
+              {data?.map((r, index) => (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>
