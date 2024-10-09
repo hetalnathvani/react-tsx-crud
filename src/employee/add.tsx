@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { postAPI } from "../helper/Api";
 
 const AddEmployee = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -40,9 +41,18 @@ const AddEmployee = (): JSX.Element => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      handleSubmit(values);
     },
   });
+
+  const handleSubmit = (values: Object) => {
+    postAPI("employees/add", values).then((res) => {
+      console.log(res);
+      if (res.data.status === "Success") {
+        // Toasters to add
+      }
+    });
+  };
 
   return (
     <div>
@@ -84,7 +94,6 @@ const AddEmployee = (): JSX.Element => {
               helperText={formik.touched.email && formik.errors.email}
             />
             <TextField
-              required
               margin="dense"
               id="projects"
               name="projects"
@@ -99,7 +108,6 @@ const AddEmployee = (): JSX.Element => {
               helperText={formik.touched.projects && formik.errors.projects}
             />
             <TextField
-              required
               margin="dense"
               id="city"
               name="city"
@@ -114,7 +122,6 @@ const AddEmployee = (): JSX.Element => {
               helperText={formik.touched.city && formik.errors.city}
             />
             <TextField
-              required
               margin="dense"
               id="education"
               name="education"
@@ -130,7 +137,9 @@ const AddEmployee = (): JSX.Element => {
               }
               helperText={formik.touched.education && formik.errors.education}
             />
-            <button type="submit">Submit</button>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
           </form>
         </DialogContent>
       </Dialog>
