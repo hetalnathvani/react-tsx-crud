@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postAPI } from "../helper/Api";
+import { toast } from "react-toastify";
 
 const AddEmployee = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -47,9 +48,8 @@ const AddEmployee = (): JSX.Element => {
 
   const handleSubmit = (values: Object) => {
     postAPI("employees/add", values).then((res) => {
-      console.log(res);
       if (res.data.status === "Success") {
-        // Toasters to add
+        toast.success(res.data.message);
       }
     });
   };
