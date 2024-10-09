@@ -80,7 +80,7 @@ export const List = () => {
                   <TableCell>{r.city}</TableCell>
                   <TableCell>{r.education}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
-                    <EditEmployee testProp={test} records={data} />
+                    <EditEmployee record={r} />
                     <DeleteEmployee />
                   </TableCell>
                 </TableRow>
