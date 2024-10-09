@@ -50,6 +50,9 @@ const AddEmployee = (): JSX.Element => {
     postAPI("employees/add", values).then((res) => {
       if (res.data.status === "Success") {
         toast.success(res.data.message);
+        handleClose();
+      } else {
+        toast.error(res.data.message);
       }
     });
   };
