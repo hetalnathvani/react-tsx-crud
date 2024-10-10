@@ -12,10 +12,11 @@ import { FC, useState } from "react";
 import { blue } from "@mui/material/colors";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useFormik } from "formik";
-import { postAPI } from "../helper/Api";
+import { putAPI } from "../helper/Api";
 import { toast } from "react-toastify";
 
 export type Data = {
+  _id: string;
   name: string;
   email: string;
   projects: string;
@@ -62,15 +63,14 @@ export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
   });
 
   const handleSubmit = (values: Object) => {
-    console.log(record);
-    // postAPI("employees/edit", values).then((res) => {
-    //   if (res.data.status === "Success") {
-    //     toast.success(res.data.message);
-    //     handleClose();
-    //   } else {
-    //     toast.error(res.data.message);
-    //   }
-    // });
+    putAPI(`employees/update/${record._id}`, values).then((res) => {
+      if (res.data.status === "Success") {
+        toast.success(res.data.message);
+        handleClose();
+      } else {
+        toast.error(res.data.message);
+      }
+    });
   };
 
   return (

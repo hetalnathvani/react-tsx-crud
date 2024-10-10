@@ -17,8 +17,6 @@ import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../helper/Api";
 
-const test: String = "Hi I am coming from List page to Add pop up ";
-
 interface EnhanceTableHeadProps {}
 
 function EnhancedTableHead(props: EnhanceTableHeadProps) {
@@ -81,7 +79,7 @@ export const List = () => {
                   <TableCell>{r.education}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee record={r} />
-                    <DeleteEmployee />
+                    <DeleteEmployee id={r._id} />
                   </TableCell>
                 </TableRow>
               ))}

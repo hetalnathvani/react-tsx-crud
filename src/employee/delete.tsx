@@ -12,9 +12,15 @@ import {
   Tooltip,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
-import { useState } from "react";
+import { FC, useState } from "react";
+import { deleteAPI } from "../helper/Api";
+import { toast } from "react-toastify";
 
-export const DeleteEmployee = () => {
+type DeleteProps = {
+  id: string;
+};
+
+export const DeleteEmployee: FC<DeleteProps> = ({ id }) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -23,6 +29,17 @@ export const DeleteEmployee = () => {
 
   const handleClick = () => {
     setOpen(true);
+  };
+
+  const handleSubmit = () => {
+    deleteAPI(`employees/delete/${id}`).then((res) => {
+      if (res.data.status === "Success") {
+        toast.success(res.data.message);
+        handleClose();
+      } else {
+        toast.error(res.data.message);
+      }
+    });
   };
 
   return (
@@ -59,7 +76,7 @@ export const DeleteEmployee = () => {
           <Button variant="outlined" onClick={handleClose}>
             No, Keep it.
           </Button>
-          <Button variant="contained" color="error">
+          <Button variant="contained" color="error" onClick={handleSubmit}>
             Yes, Delete it !
           </Button>
         </DialogActions>
