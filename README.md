@@ -51,6 +51,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - Axios
 - Formik
 - Yup validations
+- React Routes : v6
 
 ## Features covered
 - Employee module CRUD
+- Project module CRUD
