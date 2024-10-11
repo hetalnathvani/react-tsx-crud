@@ -3,16 +3,32 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  IconButton,
   TextField,
+  Tooltip,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
-import { useFormik } from "formik";
 import * as Yup from "yup";
-import { postAPI } from "../helper/Api";
+import { FC, useState } from "react";
+import { blue } from "@mui/material/colors";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { useFormik } from "formik";
+import { putAPI } from "../../helper/Api";
 import { toast } from "react-toastify";
 
-const AddEmployee = (): JSX.Element => {
+export type Data = {
+  _id: string;
+  name: string;
+  email: string;
+  projects: string;
+  city: string;
+  education: string;
+};
+
+type EmployeeListProps = {
+  record: Data;
+};
+
+export const EditEmployee: FC<EmployeeListProps> = ({ record }): JSX.Element => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -34,11 +50,11 @@ const AddEmployee = (): JSX.Element => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      projects: "",
-      city: "",
-      education: "",
+      name: record.name,
+      email: record.email,
+      projects: record.projects,
+      city: record.city,
+      education: record.education,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -47,7 +63,7 @@ const AddEmployee = (): JSX.Element => {
   });
 
   const handleSubmit = (values: Object) => {
-    postAPI("employees/add", values).then((res) => {
+    putAPI(`employees/update/${record._id}`, values).then((res) => {
       if (res.data.status === "Success") {
         toast.success(res.data.message);
         handleClose();
@@ -59,13 +75,14 @@ const AddEmployee = (): JSX.Element => {
 
   return (
     <div>
-      <Button onClick={openAddEmployeeForm}>
-        <AddIcon />
-        Add Employee
-      </Button>
+      <Tooltip title="Edit">
+        <IconButton onClick={openAddEmployeeForm}>
+          <EditOutlinedIcon style={{ color: blue["600"] }} />
+        </IconButton>
+      </Tooltip>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Employee Form</DialogTitle>
+        <DialogTitle>Edit Employee</DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
             <TextField
@@ -149,5 +166,3 @@ const AddEmployee = (): JSX.Element => {
     </div>
   );
 };
-
-export default AddEmployee;

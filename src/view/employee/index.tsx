@@ -15,7 +15,7 @@ import AddEmployee from "./add";
 import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
-import { getAPI } from "../helper/Api";
+import { getAPI } from "../../helper/Api";
 
 interface EnhanceTableHeadProps {}
 
@@ -36,7 +36,7 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
   );
 }
 
-export const List = () => {
+export const EmployeeList = () => {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {

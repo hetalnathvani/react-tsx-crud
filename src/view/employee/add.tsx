@@ -3,32 +3,16 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  IconButton,
   TextField,
-  Tooltip,
 } from "@mui/material";
-import * as Yup from "yup";
-import { FC, useState } from "react";
-import { blue } from "@mui/material/colors";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import AddIcon from "@mui/icons-material/Add";
+import { useState } from "react";
 import { useFormik } from "formik";
-import { putAPI } from "../helper/Api";
+import * as Yup from "yup";
+import { postAPI } from "../../helper/Api";
 import { toast } from "react-toastify";
 
-export type Data = {
-  _id: string;
-  name: string;
-  email: string;
-  projects: string;
-  city: string;
-  education: string;
-};
-
-type ListProps = {
-  record: Data;
-};
-
-export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
+const AddEmployee = (): JSX.Element => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -50,11 +34,11 @@ export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
 
   const formik = useFormik({
     initialValues: {
-      name: record.name,
-      email: record.email,
-      projects: record.projects,
-      city: record.city,
-      education: record.education,
+      name: "",
+      email: "",
+      projects: "",
+      city: "",
+      education: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -63,7 +47,7 @@ export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
   });
 
   const handleSubmit = (values: Object) => {
-    putAPI(`employees/update/${record._id}`, values).then((res) => {
+    postAPI("employees/add", values).then((res) => {
       if (res.data.status === "Success") {
         toast.success(res.data.message);
         handleClose();
@@ -75,14 +59,13 @@ export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
 
   return (
     <div>
-      <Tooltip title="Edit">
-        <IconButton onClick={openAddEmployeeForm}>
-          <EditOutlinedIcon style={{ color: blue["600"] }} />
-        </IconButton>
-      </Tooltip>
+      <Button onClick={openAddEmployeeForm}>
+        <AddIcon />
+        Add Employee
+      </Button>
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Employee</DialogTitle>
+        <DialogTitle>Add Employee Form</DialogTitle>
         <DialogContent>
           <form onSubmit={formik.handleSubmit}>
             <TextField
@@ -166,3 +149,5 @@ export const EditEmployee: FC<ListProps> = ({ record }): JSX.Element => {
     </div>
   );
 };
+
+export default AddEmployee;

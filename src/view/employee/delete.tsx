@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { FC, useState } from "react";
-import { deleteAPI } from "../helper/Api";
+import { deleteAPI } from "../../helper/Api";
 import { toast } from "react-toastify";
 
 type DeleteProps = {
