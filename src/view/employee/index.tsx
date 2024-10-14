@@ -50,7 +50,7 @@ export const EmployeeList = () => {
   };
 
   return (
-    <Box sx={{ paddingLeft: "64px" }}>
+    <Box>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Employees listing</Typography>
         <AddEmployee />

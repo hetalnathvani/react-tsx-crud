@@ -10,10 +10,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { pink } from "@mui/material/colors";
-// import AddEmployee from "./add";
-// import { DeleteEmployee } from "./delete";
-// import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../../helper/Api";
 import { EditEmployee } from "../employee/edit";
@@ -50,7 +46,7 @@ export const ProjectList = () => {
   };
 
   return (
-    <Box sx={{ paddingLeft: "64px" }}>
+    <Box>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Projects listing</Typography>
         {/* <AddEmployee /> */}
