@@ -16,6 +16,8 @@ import { pink } from "@mui/material/colors";
 // import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../../helper/Api";
+import { EditEmployee } from "../employee/edit";
+import { DeleteEmployee } from "../employee/delete";
 
 interface EnhanceTableHeadProps {}
 
@@ -24,12 +26,10 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
     <TableHead>
       <TableRow>
         <TableCell>ID</TableCell>
-        <TableCell>Image</TableCell>
         <TableCell>Name</TableCell>
-        <TableCell>Email</TableCell>
-        <TableCell>Project</TableCell>
-        <TableCell>City</TableCell>
-        <TableCell>Education</TableCell>
+        <TableCell>Client Name</TableCell>
+        <TableCell>Start Date</TableCell>
+        <TableCell>Status</TableCell>
         <TableCell>Action</TableCell>
       </TableRow>
     </TableHead>
@@ -64,25 +64,19 @@ export const ProjectList = () => {
           >
             <EnhancedTableHead />
             <TableBody>
-              {/* {data?.map((r, index) => (
+              {data?.map((r, index) => (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell>
-                    <Avatar sx={{ bgcolor: pink[500] }}>
-                      {r.name.charAt(0)}
-                    </Avatar>
-                  </TableCell>
                   <TableCell>{r.name}</TableCell>
-                  <TableCell>{r.email}</TableCell>
-                  <TableCell>{r.projects}</TableCell>
-                  <TableCell>{r.city}</TableCell>
-                  <TableCell>{r.education}</TableCell>
+                  <TableCell>{r.clientName}</TableCell>
+                  <TableCell>{r.startDate}</TableCell>
+                  <TableCell>{r.status}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee record={r} />
                     <DeleteEmployee id={r._id} />
                   </TableCell>
                 </TableRow>
-              ))} */}
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
