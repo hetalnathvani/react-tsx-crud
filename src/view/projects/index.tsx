@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Paper,
   Table,
@@ -14,6 +13,7 @@ import { useEffect, useState } from "react";
 import { getAPI } from "../../helper/Api";
 import { EditEmployee } from "../employee/edit";
 import { DeleteEmployee } from "../employee/delete";
+import AddProject from "./add";
 
 interface EnhanceTableHeadProps {}
 
@@ -49,7 +49,7 @@ export const ProjectList = () => {
     <Box>
       <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h6">Projects listing</Typography>
-        {/* <AddEmployee /> */}
+        <AddProject />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
         <TableContainer>
