@@ -16,6 +16,7 @@ import { DeleteEmployee } from "./delete";
 import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../../helper/Api";
+import "./employee.css";
 
 interface EnhanceTableHeadProps {}
 
@@ -23,13 +24,12 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell>ID</TableCell>
-        <TableCell>Image</TableCell>
-        <TableCell>Name</TableCell>
-        <TableCell>Email</TableCell>
-        <TableCell>Project</TableCell>
-        <TableCell>City</TableCell>
-        <TableCell>Education</TableCell>
+        <TableCell>Name & Designation</TableCell>
+        <TableCell>Reporting To</TableCell>
+        <TableCell>In Org. Since</TableCell>
+        <TableCell>Experience</TableCell>
+        <TableCell>Technical Skills</TableCell>
+        <TableCell>Status</TableCell>
         <TableCell>Action</TableCell>
       </TableRow>
     </TableHead>
@@ -51,8 +51,15 @@ export const EmployeeList = () => {
 
   return (
     <Box>
-      <Box sx={{ ml: 4, display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6">Employees listing</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+          Employees listing
+        </Typography>
         <AddEmployee />
       </Box>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -66,17 +73,20 @@ export const EmployeeList = () => {
             <TableBody>
               {data?.map((r, index) => (
                 <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>
+                  <TableCell sx={{ display: "flex", gap: "10px" }}>
                     <Avatar sx={{ bgcolor: pink[500] }}>
                       {r.name.charAt(0)}
                     </Avatar>
+                    <div className="d-flex flex-direction-column">
+                      <strong>{r.name}</strong>
+                      <label className="sub-title">Sr. Engineer</label>
+                    </div>
                   </TableCell>
-                  <TableCell>{r.name}</TableCell>
-                  <TableCell>{r.email}</TableCell>
-                  <TableCell>{r.projects}</TableCell>
-                  <TableCell>{r.city}</TableCell>
-                  <TableCell>{r.education}</TableCell>
+                  <TableCell>Indrajeet Sengar</TableCell>
+                  <TableCell>2.5 yrs</TableCell>
+                  <TableCell>5 yrs</TableCell>
+                  <TableCell>JavaScript, React.js</TableCell>
+                  <TableCell>Available</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee record={r} />
                     <DeleteEmployee id={r._id} />
