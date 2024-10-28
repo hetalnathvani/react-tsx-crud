@@ -79,7 +79,7 @@ export const EmployeeList = () => {
                     </Avatar>
                     <div className="d-flex flex-direction-column">
                       <strong>{r.name}</strong>
-                      <label className="sub-title">Sr. Engineer</label>
+                      <label className="sub-title">{r.designation}</label>
                     </div>
                   </TableCell>
                   <TableCell>Indrajeet Sengar</TableCell>
