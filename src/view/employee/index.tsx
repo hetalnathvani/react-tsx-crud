@@ -17,6 +17,7 @@ import { EditEmployee } from "./edit";
 import { useEffect, useState } from "react";
 import { getAPI } from "../../helper/Api";
 import "./employee.css";
+import moment from "moment";
 
 interface EnhanceTableHeadProps {}
 
@@ -25,10 +26,8 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
     <TableHead>
       <TableRow>
         <TableCell>Name & Designation</TableCell>
-        <TableCell>Reporting To</TableCell>
         <TableCell>In Org. Since</TableCell>
         <TableCell>Experience</TableCell>
-        <TableCell>Technical Skills</TableCell>
         <TableCell>Status</TableCell>
         <TableCell>Action</TableCell>
       </TableRow>
@@ -82,11 +81,9 @@ export const EmployeeList = () => {
                       <label className="sub-title">{r.designation}</label>
                     </div>
                   </TableCell>
-                  <TableCell>Indrajeet Sengar</TableCell>
-                  <TableCell>2.5 yrs</TableCell>
-                  <TableCell>5 yrs</TableCell>
-                  <TableCell>JavaScript, React.js</TableCell>
-                  <TableCell>Available</TableCell>
+                  <TableCell>{moment(r.joiningDate).fromNow()}</TableCell>
+                  <TableCell>{moment(r.startDate).fromNow()}</TableCell>
+                  <TableCell>{r.status}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee record={r} />
                     <DeleteEmployee id={r._id} />
