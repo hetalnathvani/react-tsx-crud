@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  MenuItem,
   TextField,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
@@ -30,6 +31,8 @@ const AddEmployee = (): JSX.Element => {
       .required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     projects: Yup.string().required(),
+    designation: Yup.string().required(),
+    joiningDate: Yup.date().required(),
   });
 
   const formik = useFormik({
@@ -39,9 +42,11 @@ const AddEmployee = (): JSX.Element => {
       projects: "",
       city: "",
       education: "",
+      designation: "",
+      joiningDate: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values: Object) => {
       handleSubmit(values);
     },
   });
@@ -121,8 +126,6 @@ const AddEmployee = (): JSX.Element => {
               value={formik.values.city}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.city && Boolean(formik.errors.city)}
-              helperText={formik.touched.city && formik.errors.city}
             />
             <TextField
               margin="dense"
@@ -135,11 +138,41 @@ const AddEmployee = (): JSX.Element => {
               value={formik.values.education}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={
-                formik.touched.education && Boolean(formik.errors.education)
-              }
-              helperText={formik.touched.education && formik.errors.education}
             />
+
+            {/* Designation field  */}
+            <TextField
+              margin="dense"
+              id="designation"
+              name="designation"
+              label="Designation"
+              type="text"
+              fullWidth
+              select
+              variant="standard"
+              value={formik.values.designation}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.designation && Boolean(formik.errors.designation)
+              }
+              helperText={
+                formik.touched.designation && formik.errors.designation
+              }
+            >
+              <MenuItem value="Software Intern">Software Intern</MenuItem>
+              <MenuItem value="Software Engineer">Software Engineer</MenuItem>
+              <MenuItem value="Sr. Software Engineer">
+                Sr. Software Engineer
+              </MenuItem>
+              <MenuItem value="Technical Lead">Technical Lead</MenuItem>
+              <MenuItem value="Project Manager">Project Manager</MenuItem>
+              <MenuItem value="Delivery Head">Delivery Head</MenuItem>
+            </TextField>
+
+            <Button type="submit" variant="outlined">
+              Close
+            </Button>
             <Button type="submit" variant="contained">
               Submit
             </Button>
