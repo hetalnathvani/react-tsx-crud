@@ -12,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import GroupsIcon from "@mui/icons-material/Groups";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Outlet, Route, Routes } from "react-router-dom";
 import { EmployeeList } from "../view/employee";
 import { ProjectList } from "../view/projects";
 
@@ -95,10 +95,9 @@ export default function ClippedDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <Routes>
-          <Route path="/employees" element={<EmployeeList />} />
-          <Route path="/projects" element={<ProjectList />} />
-        </Routes>
+        <main>
+          <Outlet />
+        </main>
       </Box>
     </Box>
   );
