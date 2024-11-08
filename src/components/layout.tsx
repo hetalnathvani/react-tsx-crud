@@ -12,9 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import GroupsIcon from "@mui/icons-material/Groups";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import { Link, Outlet, Route, Routes } from "react-router-dom";
-import { EmployeeList } from "../view/employee";
-import { ProjectList } from "../view/projects";
+import { Link, Outlet } from "react-router-dom";
 
 const drawerWidth = 240;
 

@@ -4,7 +4,18 @@ import { ProjectList } from "../view/projects";
 import Layout from "../components/layout";
 
 export const router = createBrowserRouter([
-  { path: "/", element: <Layout /> },
-  { path: "/employees", element: <EmployeeList /> },
-  { path: "/projects", element: <ProjectList /> },
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "employees",
+        element: <EmployeeList />,
+      },
+      {
+        path: "projects",
+        element: <ProjectList />,
+      },
+    ],
+  },
 ]);
