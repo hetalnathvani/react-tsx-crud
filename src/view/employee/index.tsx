@@ -28,6 +28,9 @@ function EnhancedTableHead(props: EnhanceTableHeadProps) {
         <TableCell>Name & Designation</TableCell>
         <TableCell>In Org. Since</TableCell>
         <TableCell>Experience</TableCell>
+        <TableCell>Education</TableCell>
+        <TableCell>City</TableCell>
+        <TableCell>Projects</TableCell>
         <TableCell>Status</TableCell>
         <TableCell>Action</TableCell>
       </TableRow>
@@ -83,6 +86,9 @@ export const EmployeeList = () => {
                   </TableCell>
                   <TableCell>{moment(r.joiningDate).fromNow()}</TableCell>
                   <TableCell>{moment(r.startDate).fromNow()}</TableCell>
+                  <TableCell>{r.education}</TableCell>
+                  <TableCell>{r.city}</TableCell>
+                  <TableCell>{r.projects}</TableCell>
                   <TableCell>{r.status}</TableCell>
                   <TableCell sx={{ display: "flex" }}>
                     <EditEmployee record={r} />
