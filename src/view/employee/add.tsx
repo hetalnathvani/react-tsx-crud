@@ -12,6 +12,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { postAPI } from "../../helper/Api";
 import { toast } from "react-toastify";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import dayjs from "dayjs";
 
 const AddEmployee = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -43,7 +47,8 @@ const AddEmployee = (): JSX.Element => {
       city: "",
       education: "",
       designation: "",
-      joiningDate: "",
+      joiningDate: dayjs(new Date()),
+      startDate: dayjs(new Date()),
     },
     validationSchema: validationSchema,
     onSubmit: (values: Object) => {
@@ -139,6 +144,26 @@ const AddEmployee = (): JSX.Element => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
+
+            {/* Start Date and End Date field */}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={["DatePicker", "DatePicker"]}>
+                <DatePicker
+                  label="Career start Date"
+                  value={formik.values.startDate}
+                  onChange={(value) =>
+                    formik.setFieldValue("startDate", value, true)
+                  }
+                />
+                <DatePicker
+                  label="Joining Date"
+                  value={formik.values.joiningDate}
+                  onChange={(value) =>
+                    formik.setFieldValue("joiningDate", value, true)
+                  }
+                />
+              </DemoContainer>
+            </LocalizationProvider>
 
             {/* Designation field  */}
             <TextField
